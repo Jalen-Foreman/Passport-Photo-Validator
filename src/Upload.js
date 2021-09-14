@@ -1,51 +1,52 @@
 import React, {useState} from 'react';
 import {Button, Form, FormGroup} from 'reactstrap';
+import axios from 'axios';
 import './Upload.css'
 
 const Upload = () => {
 
     const [data, setData] = useState()
-    const [result, setResult] = useState([])
+    const [result, setResult] = useState()
     const [ifPerson, setIfPerson] = useState('')
 
-    const uploadImage = async (e) => {
+    const uploadImage = (e) => {
         const file = e.target.files[0]
-        const base64 = await convertBase64(file)
-        setData(base64)
+        convertBase64(file)
     }
 
     const convertBase64 = (file) => {
-        return new Promise((resolve, reject) => {
             const fileReader = new FileReader()
             fileReader.readAsDataURL(file)
-            
+
             fileReader.onload = () => {
-                resolve(fileReader.result)
+                let base64 = fileReader.result
+                setData(base64)
             }
 
             fileReader.onerror = (error) => {
-                reject(error)
+                console.log(error);
             }
-        })
-    }
-
-    const fileUpload = async () => {
-        const response = await fetch('https://f55qj1kvya.execute-api.us-east-1.amazonaws.com/Dev/passportphoto', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({photo: data})
-        })
         
-        const Result = await response.json()
-        setResult(Result.body)
-        const FaceDetails = await JSON.parse(result)
-        if(FaceDetails['FaceDetails'][0] === undefined) {
-            setIfPerson('This picture is invalid. Please upload a valid jpeg picture.')
-        } else {
-            setIfPerson('This picture is valid!')
+    }
+    
+    const fileUpload = async () => {
+        
+        const response = await axios({
+            method: 'post',
+            url: 'https://slq4jw7mya.execute-api.us-east-2.amazonaws.com/Dev/passportphoto',
+            data: JSON.stringify({photo: data}),
+        })
+        try {
+            await setResult(response.data.body)
+            const FaceDetails = JSON.parse(result)
+            if(FaceDetails['FaceDetails'][0] === undefined) {
+                setIfPerson('This picture is invalid. Please upload a valid jpeg picture.')
+            } else {
+                setIfPerson('This picture is valid!')
+            }
+            
+        } catch (error) {
+            console.log(error);
         }
 
         
