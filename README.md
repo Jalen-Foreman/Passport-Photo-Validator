@@ -17,7 +17,8 @@ http://passportphotovalidator.s3-website-us-east-1.amazonaws.com/
 - AWS Rekognition ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 ## Wireframe
 
-<img width="1318" alt="Screen Shot 2021-09-09 at 9 38 46 PM" src="https://user-images.githubusercontent.com/78430591/132784932-8b034966-a7a2-41c3-9012-86a3df81c7ab.png">
+<img width="766" alt="Screen Shot 2021-09-14 at 3 37 41 PM" src="https://user-images.githubusercontent.com/78430591/133322689-9c0aad67-e97a-4428-89c3-fa2f19bf683c.png">
+
 
 ### Development
 
