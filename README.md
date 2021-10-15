@@ -1,6 +1,9 @@
 # Passport-Photo-Validator
 A serverless app that utilizes React.js for the frontend, that verifies if the photo is a person or not. This React.js application is publically hosted on AWS S3. Through the React application, the user chooses their image file which then gets encoded in base64. This data is posted through a axios call which pings AWS API Gateway. AWS API Gateway then pings AWS Rekognition to obtain data on the image file. If the file contains valid facial data, my React application verifies the photo.
 
+# Technical Difficulties
+I couldn't figure out how to update the state all at the same time when my api was pinged but to verify the photo you must click it numerous times before you get the verification working
+
 # Website hosting on AWS S3
 http://passportphotovalidator.s3-website-us-east-1.amazonaws.com/
 
